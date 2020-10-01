@@ -4,7 +4,7 @@ import os
 import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
-#from flask_apscheduler import APScheduler
+from flask_apscheduler import APScheduler
 
 def My_Map():
     chrome_options = webdriver.ChromeOptions()
@@ -80,6 +80,7 @@ def My_Map():
                 L.append(mytable[j])
                 continue
     df = pd.DataFrame(L)
+    global ma
     ma = folium.Map(location=[30, -10], zoom_start=5, min_zoom=4, max_zoom=7,tiles="cartodbpositron")
     geo = "https://raw.githubusercontent.com/Salah-Zkara/Morocco-GeoJson/master/Morocco-Regions.json"
     folium.Choropleth(
@@ -110,11 +111,10 @@ def My_Map():
     ma.fit_bounds(ma.get_bounds())
     #ma.save('templates/map.html')
     print("DONE")
-    return ma
 
 
 app=Flask(__name__)
-#scheduler = APScheduler()
+scheduler = APScheduler()
 
 @app.route("/")
 def home():
@@ -122,13 +122,13 @@ def home():
 
 @app.route("/covid_map")
 def covid_map():
-    return My_Map().get_root().render()
+    return ma.get_root().render()
 
 
 
 
 
 if __name__=="__main__":
-    #scheduler.add_job(id = 'Covid Map task',func= My_Map ,trigger = 'interval',  minutes=2)
-    #scheduler.start()
+    scheduler.add_job(id = 'Covid Map task',func= My_Map ,trigger = 'interval',  minutes=2)
+    scheduler.start()
     app.run()  
