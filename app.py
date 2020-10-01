@@ -112,7 +112,6 @@ def My_Map():
     ma.fit_bounds(ma.get_bounds())
     #ma.save('templates/map.html')
     print("DONE")
-    time.sleep(600)
 
 
 app=Flask(__name__)
