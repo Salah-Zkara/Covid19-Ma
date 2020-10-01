@@ -4,7 +4,7 @@ import os
 import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from flask_apscheduler import APScheduler
+#from flask_apscheduler import APScheduler
 
 def My_Map():
     chrome_options = webdriver.ChromeOptions()
@@ -114,7 +114,7 @@ def My_Map():
 
 
 app=Flask(__name__)
-scheduler = APScheduler()
+#scheduler = APScheduler()
 
 @app.route("/")
 def home():
