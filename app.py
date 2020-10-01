@@ -12,6 +12,8 @@ def My_Map():
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
+    chrome_driver_path = 'C:\drivers\chromedriver.exe'
+    #'''executable_path = os.environ.get("CHROMEDRIVER_PATH")'''
     browser = webdriver.Chrome(executable_path = os.environ.get("CHROMEDRIVER_PATH"),chrome_options=chrome_options)
     browser.get("https://m.le360.ma/covidmaroc/")
     html = browser.page_source
@@ -119,6 +121,7 @@ def home():
 
 @app.route("/covid_map")
 def covid_map():
+    My_Map()
     return render_template("map.html")
 
 
@@ -126,6 +129,6 @@ def covid_map():
 
 
 if __name__=="__main__":
-    scheduler.add_job(id = 'Covid Map task',func= My_Map ,trigger = 'interval',  minutes=2)
-    scheduler.start()
+    #scheduler.add_job(id = 'Covid Map task',func= My_Map ,trigger = 'interval',  minutes=2)
+    #scheduler.start()
     app.run()  
