@@ -4,7 +4,6 @@ import os
 import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
-import time
 import threading
 
 def My_Map():
