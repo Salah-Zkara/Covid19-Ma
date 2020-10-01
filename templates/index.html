@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid19 Stats</title>
+    <link rel="icon" href="./static/img/stats.png">
+    <link rel="stylesheet" href="./static/CSS/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Baloo+Paaji+2:wght@500;600;700&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <header>
+        <img src="./static/img/EST-essaouira.png" alt="EST Essaouira" width="233.6px" height="112px">
+        <div id="cov">
+            <h1>Covid19 Maroc</h1>
+        </div>
+        
+        <div id="ids">
+            <h1 id="idsd">IDSD 2020</h1>
+            <h2 id="este">EST Essaouira</h2>
+        </div>
+
+    </header>
+    <div id="container">
+        <div class="items" id="chart">
+            <canvas id="myChart" ></canvas>
+        </div>
+
+        <div class="items" id="dleft">
+            <iframe src="/covid_map" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+
+    </div>
+    <footer>
+        by S.ZKARA&copy;
+    </footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="./static/JS/script.js"></script>
+</html>
