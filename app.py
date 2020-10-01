@@ -4,8 +4,8 @@ import os
 import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
-#import time
-#import threading
+import time
+import threading
 
 def My_Map():
     chrome_options = webdriver.ChromeOptions()
@@ -112,11 +112,13 @@ def My_Map():
     ma.fit_bounds(ma.get_bounds())
     #ma.save('templates/map.html')
     print("DONE")
+    time.sleep(600)
 
 
 app=Flask(__name__)
 
-My_Map()
+
+threading.Thread(target=My_Map).start()
 
 @app.route("/")
 def home():
