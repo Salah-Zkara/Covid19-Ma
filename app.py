@@ -108,8 +108,9 @@ def My_Map():
                         ).add_to(ma)
     df.apply(plotDot, axis = 1)
     ma.fit_bounds(ma.get_bounds())
-    ma.save('templates/map.html')
+    #ma.save('templates/map.html')
     print("DONE")
+    return ma
 
 
 app=Flask(__name__)
@@ -121,8 +122,7 @@ def home():
 
 @app.route("/covid_map")
 def covid_map():
-    My_Map()
-    return render_template("map.html")
+    return My_Map().get_root().render()
 
 
 
