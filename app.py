@@ -4,7 +4,6 @@ import os
 import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
-import threading
 
 def My_Map():
     chrome_options = webdriver.ChromeOptions()
@@ -110,13 +109,9 @@ def My_Map():
     df.apply(plotDot, axis = 1)
     ma.fit_bounds(ma.get_bounds())
     #ma.save('templates/map.html')
-    print("DONE")
-
+    #print("DONE")
 
 app=Flask(__name__)
-
-
-threading.Thread(target=My_Map).start()
 
 @app.route("/")
 def home():
@@ -124,11 +119,8 @@ def home():
 
 @app.route("/covid_map")
 def covid_map():
+    My_Map
     return ma.get_root().render()
-
-
-
-
 
 if __name__=="__main__":
     app.run()  
