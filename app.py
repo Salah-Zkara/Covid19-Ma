@@ -119,7 +119,7 @@ def home():
 
 @app.route("/covid_map")
 def covid_map():
-    My_Map
+    My_Map()
     return ma.get_root().render()
 
 if __name__=="__main__":
