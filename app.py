@@ -24,8 +24,17 @@ def My_Map():
         row=row.find_all('td')
         
         name = row[0].text.split('\u200b')[0]
-        cas = int(row[1].text)
-        cast_24 = int(row[2].text[1:])
+    
+        if(row[1].text==''):
+            cas=0
+        else:
+            cas = int(row[1].text)
+
+        if(row[2].text[1:]==''):
+            cast_24=0
+        else:
+            cast_24 = int(row[2].text[1:])
+
         if(row[3].text[1:]==''):
             dead_24=0
         else:
