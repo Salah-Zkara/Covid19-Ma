@@ -5,6 +5,13 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
+def clean_word(L):
+    a=[]
+    for word in L:
+        if len(word)>2:
+            a.append(word)
+    return " ".join(a)
+
 def My_Map():
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -19,28 +26,24 @@ def My_Map():
     browser.quit()
     soup = BeautifulSoup(html,'html.parser')
     list_table=soup.find_all('table', class_='table table-bordered dataTable')[0].find('tbody').find_all('tr')
+
     mytable=[]
     for row in list_table:
         row=row.find_all('td')
-        
-        name = row[0].text.split('\u200b')[0]
-    
+        name = clean_word(row[0].find('span').text.split(' ')).split('\u200b')[0]
         if(row[1].text==''):
-            cas=0
+        	cas=0
         else:
-            cas = int(row[1].text)
-
+        	cas = int(row[1].text)
         if(row[2].text[1:]==''):
             cast_24=0
         else:
-            cast_24 = int(row[2].text[1:])
-
+        	cast_24 = int(row[2].text[1:])
         if(row[3].text[1:]==''):
-            dead_24=0
+        	dead_24=0
         else:
-            dead_24 = int(row[3].text[1:])
+        	dead_24 = int(row[3].text[1:])
         mytable.append({'name': name , 'cas': cas , 'cas_24': cast_24, 'dead_24':dead_24 })
-        
     regions_loc = [
         {'name': 'Oriental',
         'latitude': 34.21063161705621,
@@ -82,7 +85,8 @@ def My_Map():
     L=[]
     for i in range(12):
         for j in range(12):
-            if(regions_loc[i]['name']==mytable[j]['name']):
+            if(regions_loc[i]['name'][0:5]==mytable[j]['name'][0:5]):
+                mytable[j]['name'] = regions_loc[i]['name']
                 mytable[j]['latitude'] = regions_loc[i]['latitude']
                 mytable[j]['longitude'] = regions_loc[i]['longitude']
                 L.append(mytable[j])
